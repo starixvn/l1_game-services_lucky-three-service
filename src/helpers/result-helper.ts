@@ -1,6 +1,6 @@
 import { LuckyThree, Utils } from "@rd/numbers-game-probabilities";
 import { DrawResult } from "../models/rounds";
-import { BALLS_EACH_DRAW, MEDIAN, RED_BALLS } from "../constants";
+import { BALLS_EACH_DRAW, MEDIAN } from "../constants";
 
 export type FinalSeeds = {
     serverSeed: string;
@@ -56,18 +56,10 @@ export const getSettlementResult = (result: DrawResult) => {
     };
 };
 
-const getTotalReds = (balls: number[]) => {
-    let totalReds = 0;
-    balls.forEach((ball) => {
-        if (RED_BALLS.includes(+ball)) {
-            totalReds++;
-        }
-    });
-    return totalReds;
-};
+const getTotalReds = (balls: number[]) => [...balls].filter((ball) => +ball % 2 === 0).length;
 
 export const getProbabilities = (roundResult: DrawResult[]) => {
-    const drawn = (roundResult as DrawResult[])
+    const drawn = roundResult
         .map((res) => res.balls)
         .flat()
         .map((ball) => +ball);
