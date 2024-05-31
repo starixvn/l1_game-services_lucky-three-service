@@ -20,7 +20,7 @@ export const generateResult = (finalSeeds: FinalSeeds) => {
 
     const ballIndexes = randomIndexes.map((randomValue, index) => (randomValue + increments[index]) % (totalRemainingBalls - index));
 
-    let currentRemainingBalls: number[] = remainingBalls;
+    const currentRemainingBalls: number[] = remainingBalls;
 
     const balls: number[] = [];
 
