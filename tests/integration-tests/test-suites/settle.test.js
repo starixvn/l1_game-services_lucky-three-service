@@ -33,7 +33,7 @@ describe("when settle", () => {
             // Arrange
             const inGameData = await client.handleGameEvent((data) => data.remainingTime);
             setTimeout(() => {
-                client.emit(eventTypes.bet, { betChoices: { over: 10, odd: 20 }, clientSeed: "1234" });
+                client.emit(eventTypes.bet, { betChoices: { over: 10, red2: 20 }, clientSeed: "1234" });
             }, getTimeOutToPlacingBetTime(inGameData.remainingTime, gameSettings.durations) * 1000);
 
             // Act

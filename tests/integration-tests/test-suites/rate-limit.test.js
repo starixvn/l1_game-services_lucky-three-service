@@ -29,8 +29,8 @@ describe("rate limit test", () => {
         client = null;
     });
 
-    describe("when place-bet", () => {
-        it("should NOT limit with rate limit", async () => {
+    describe("when sending bet request (place bet)", () => {
+        it("should NOT protect with rate limit", async () => {
             // Arrange
             const inGameData = await client.handleGameEvent((data) => data.remainingTime);
             const placeBetTime = getTimeOutToPlacingBetTime(inGameData.remainingTime, gameSettings.durations) * 1000;
@@ -52,8 +52,8 @@ describe("rate limit test", () => {
         });
     });
 
-    describe("when getHistory", () => {
-        it("should limit with rate limit", async () => {
+    describe("when NOT sending bet request (getHistory)", () => {
+        it("should protect with rate limit", async () => {
             // Arrange
             for (let i = 0; i < maxRequests + 1; i++) {
                 client.emit("getHistory", { page: 1 });

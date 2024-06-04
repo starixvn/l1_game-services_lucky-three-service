@@ -34,7 +34,7 @@ describe("unSettled round", () => {
 
     it("should settled all unsettled bets", async () => {
         // Act
-        const unSettledBets = await bets.find({ drawId: 8 }).lean().exec();
+        const unSettledBets = await bets.find({ drawId: 4 }).lean().exec();
 
         // Assert
         unSettledBets.forEach((bet) => {

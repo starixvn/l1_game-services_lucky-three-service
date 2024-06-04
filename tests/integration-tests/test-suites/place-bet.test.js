@@ -32,7 +32,7 @@ describe("when place bet", () => {
             // Arrange
             const inGameData = await client.handleGameEvent((data) => data.remainingTime);
             setTimeout(() => {
-                client.emit(eventTypes.bet, { betChoices: { over: 10.9, odd: 20.9 }, clientSeed: "1234" });
+                client.emit(eventTypes.bet, { betChoices: { over: 10.9, red2: 20.9 }, clientSeed: "1234" });
             }, getTimeOutToPlacingBetTime(inGameData.remainingTime, gameSettings.durations) * 1000);
 
             // Act
@@ -41,7 +41,7 @@ describe("when place bet", () => {
             // Assert
             expect(result.ownBets).toEqual({
                 over: 10,
-                odd: 20,
+                red2: 20,
             });
         });
 });
