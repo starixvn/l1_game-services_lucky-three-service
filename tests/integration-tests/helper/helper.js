@@ -20,27 +20,42 @@ export const checkConnect = (socketOptions, callback) => {
 
 export const getTimeOutToPlacingBetTime = (remainingTime, durations) => {
     remainingTime = Helpers.getCurrentTimeOfTurn(remainingTime, durations.wholeTurn, gameSettings.numberOfTurnsPerRound);
+    const currentDraw = Helpers.getCurrentTurn(remainingTime, durations.wholeTurn, gameSettings.numberOfTurnsPerRound);
 
     let timeout = 0;
     if (remainingTime <= durations.lockingBet) {
         timeout = remainingTime + durations.wholeTurn - durations.placingBets + 2;
+
+        if (currentDraw === gameSettings.numberOfTurnsPerRound) {
+            timeout += durations.startingRound;
+        }
     } else if (remainingTime >= durations.placingBets) {
-        timeout = remainingTime - durations.placingBets + 1;
+        timeout = remainingTime - durations.placingBets + 2;
     }
-    
+
     return timeout;
 };
 
 export const getTimeOutToSettleTime = (remainingTime, durations) => {
+    remainingTime = Helpers.getCurrentTimeOfTurn(remainingTime, durations.wholeTurn, gameSettings.numberOfTurnsPerRound);
+    const currentDraw = Helpers.getCurrentTurn(remainingTime, durations.wholeTurn, gameSettings.numberOfTurnsPerRound);
+    const showingResultTime = durations.placingBets + durations.showingResult;
+
     let timeout = 0;
-    if (remainingTime <= durations.placingBets) {
-        timeout = remainingTime + 1.5;
+    if (remainingTime <= durations.placingBets || remainingTime >= showingResultTime) {
+        timeout = remainingTime + 1;
+
+        if (currentDraw === gameSettings.numberOfTurnsPerRound) {
+            timeout += durations.startingRound;
+        }
     }
 
     return timeout;
 };
 
 export const getTimeOutToBetInvalid = (remainingTime, durations) => {
+    remainingTime = Helpers.getCurrentTimeOfTurn(remainingTime, durations.wholeTurn, gameSettings.numberOfTurnsPerRound);
+
     let timeout = 0;
     if (remainingTime >= durations.lockingBet && remainingTime <= durations.placingBets) {
         timeout = remainingTime - durations.lockingBet + 1;
@@ -58,4 +73,3 @@ export const initUserSession = (user) => {
         browserUserAgent: "browser-user-agent",
     };
 };
-

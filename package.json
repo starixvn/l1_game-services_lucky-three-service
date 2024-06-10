@@ -1,10 +1,10 @@
 {
-    "name": "next-ball-1-service",
+    "name": "lucky-three-service",
     "version": "1.0.0",
     "description": "",
     "repository": {
         "type": "git",
-        "url": "https://git3.nexdev.net/l1/game-services/next-ball-1-service.git"
+        "url": "https://git3.nexdev.net/l1/game-services/lucky-three-service.git"
     },
     "author": "",
     "license": "ISC",
