@@ -23,7 +23,7 @@ describe("statistic test", () => {
     const definition = stub<GameDefinition>();
     const publisher = stub<RoundResultPublisher>();
     const provablyFairConsumer = stub<ProvablyFairConsumer>();
-    const numberOfTurnsToRun = 2000 * gameSettings.numberOfTurnsPerRound;
+    const numberOfTurnsToRun = 10_000;
     const BET_CHOICES = {
         over: 0,
         under: 0,
@@ -105,9 +105,12 @@ describe("statistic test", () => {
                     rtpPerChoice[choice] = totalWin[choice] / totalBet[choice];
                 });
 
-                gameSettings.choices.forEach((choice) => {
-                    expect(rtpPerChoice[choice]).toBeLessThanOrEqual(1);
-                });
+                expect(rtpPerChoice.over).toBeLessThanOrEqual(1);
+                expect(rtpPerChoice.under).toBeLessThanOrEqual(1);
+                expect(rtpPerChoice.red2).toBeLessThanOrEqual(1);
+                expect(rtpPerChoice.red3).toBeLessThanOrEqual(1);
+                expect(rtpPerChoice.blue2).toBeLessThanOrEqual(1);
+                expect(rtpPerChoice.blue3).toBeLessThanOrEqual(1);
             });
         });
     });
