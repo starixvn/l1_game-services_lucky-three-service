@@ -8,11 +8,7 @@ export default class InGameConsumer extends EventConsumers.InGameConsumer {
     }
 
     getBetPercentage(playerBetCount: Record<string, string[]>) {
-        const betPercentage = super.getBetPercentage(playerBetCount);
-
-        roundBetPercentage(betPercentage);
-
-        return betPercentage;
+        return roundBetPercentage(playerBetCount);
     }
 
     getCurrentRoundData() {

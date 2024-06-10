@@ -4,7 +4,6 @@ import { ContainerRegistry } from "sc-number-game-base";
 import { InGameConsumer, RoundResultConsumer } from "./event-consumers";
 import RunningRoundInfoPublisher from "./event-publishers/running-round-info-publisher";
 import { GameStatusPublisher } from "./event-publishers";
-import { Bot, ProcessBetQueue } from "./crons";
 
 export default class LuckyThreeContainerRegistry extends ContainerRegistry {
     registerModels() {
@@ -16,14 +15,6 @@ export default class LuckyThreeContainerRegistry extends ContainerRegistry {
             tempBetsRepository: asValue(tmpBets),
             betLogsRepository: asValue(betLogs),
             resultsRepository: asValue(results),
-        });
-    }
-
-    registerCrons() {
-        super.registerCrons();
-        this.container.register({
-            bot: asClass(Bot).singleton(),
-            processBetQueue: asClass(ProcessBetQueue).singleton().proxy(),
         });
     }
 

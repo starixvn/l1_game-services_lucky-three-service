@@ -11,7 +11,7 @@ describe("running-round-info-publisher test", () => {
         publisher = new RunningRoundInfoPublisher("LuckyThree", gameData);
         jest.spyOn(EventPublishers.RunningRoundInfoPublisher.prototype, "getBetPercentageAndPlayerBetCount").mockReturnValue({
             betPercentage: { over: 37.5, under: 37.5 },
-            playerBetCount: { over: 3, under: 3 },
+            playerBetCount: { over: 3, under: 2 },
         });
     });
 
@@ -29,13 +29,16 @@ describe("running-round-info-publisher test", () => {
         });
 
         it("should return correct", () => {
+            //arrange
+            gameData.playerBetCount = { over: ["1", "2", "3"], under: ["4", "5"] };
+
             // act
             const actual = publisher.getBetPercentageAndPlayerBetCount();
 
             // assert
             expect(actual).toStrictEqual({
-                betPercentage: { over: 37, under: 63 },
-                playerBetCount: { over: 3, under: 3 },
+                betPercentage: { over: 60, under: 40 },
+                playerBetCount: { over: 3, under: 2 },
             });
         });
     });

@@ -3,31 +3,50 @@ import { roundBetPercentage } from "../../../src/helpers/round-bet-percentage";
 describe("round bet percentage tests", () => {
     const testCases = [
         {
-            betPercentage: {
-                over: 24.5,
-                under: 75.5,
+            playerBetCount: {
+                over: ["1", "2", "3"],
+                under: ["4", "5"],
             },
 
             expected: {
-                over: 24,
-                under: 76,
+                over: 60,
+                under: 40,
             },
         },
         {
-            betPercentage: {
-                over: 24.9,
-                under: 75.1,
+            playerBetCount: {
+                over: [],
+                under: ["4", "5"],
             },
 
             expected: {
-                over: 24,
-                under: 76,
+                over: 0,
+                under: 100,
+            },
+        },
+        {
+            playerBetCount: {
+                over: ["1", "2", "3"],
+                under: [],
+            },
+
+            expected: {
+                over: 100,
+                under: 0,
+            },
+        },
+
+        {
+            playerBetCount: {},
+            expected: {
+                over: 0,
+                under: 0,
             },
         },
     ];
-    it.each(testCases)("should return expected", ({ betPercentage, expected }) => {
+    it.each(testCases)("should return expected", ({ playerBetCount, expected }) => {
         // act
-        const actual = roundBetPercentage(betPercentage);
+        const actual = roundBetPercentage(playerBetCount as any);
 
         // assert
         expect(actual).toEqual(expected);
