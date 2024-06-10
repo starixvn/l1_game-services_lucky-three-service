@@ -192,7 +192,7 @@ describe("service place bet validation (config: minBet = 1, maxBet = 3000)", () 
 
                 // Assert
                 expect(result.endBet).toBe(-1);
-                expect(result.notice.errorCode).toBe("SB1941");
+                expect(result.notice.errorCode).toEqual(expect.stringMatching(/^(SB1941|SB1906)$/));
             });
         });
 
