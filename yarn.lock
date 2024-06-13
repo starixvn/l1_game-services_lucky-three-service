@@ -2029,10 +2029,10 @@
   resolved "http://npm.lumigame.com/@protobufjs/utf8/-/utf8-1.1.0.tgz#a777360b5b39a1a2e5106f8e858f2fd2d060c570"
   integrity sha1-p3c2C1s5oaLlEG+OhY8v0tBgxXA=
 
-"@rd/numbers-game-probabilities@1.6.1-beta.0":
-  version "1.6.1-beta.0"
-  resolved "http://npm.lumigame.com/@rd/numbers-game-probabilities/-/numbers-game-probabilities-1.6.1-beta.0.tgz#caf2f9f75a77bd4021b27b3cb0c9f5c574de1737"
-  integrity sha512-yFGxATd5FITldYF82grpn6w/LJkltcJk8+Yv+wjhRLV77KKY3JZ0vX7peT+GDh8Ei20xDHVjU35QdSFXl446xQ==
+"@rd/numbers-game-probabilities@1.6.1-beta.1":
+  version "1.6.1-beta.1"
+  resolved "http://npm.lumigame.com/@rd/numbers-game-probabilities/-/numbers-game-probabilities-1.6.1-beta.1.tgz#15f1417fef866b788b2c1ba98f36c7850a149e3a"
+  integrity sha512-LGElLdc1K/w4M92ol597EaGmxTbZ2ibdj5W3qGvLezhN4LPyl/jqC7Vk0imSjInl/y5h0/okqdkAnv/fOvhy0A==
   dependencies:
     mathjs "^12.2.1"
 
