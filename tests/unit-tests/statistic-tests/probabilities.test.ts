@@ -16,7 +16,7 @@ function generateSeed(): string {
     return chance.ssn({ ssnFour: true });
 }
 
-describe("statistic test", () => {
+describe("probabilities test", () => {
     let consumer: RoundResultConsumer;
     const gameData = stub<GameData>();
     const definition = stub<GameDefinition>();
