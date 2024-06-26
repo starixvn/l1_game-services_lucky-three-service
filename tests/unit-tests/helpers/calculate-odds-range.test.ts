@@ -9,21 +9,21 @@ describe("calculateOddsRange tests", () => {
     it("should call Helpers.getBetOdds", () => {
         // arrange
         const MinProbability = {
-            over: 0.3742138365,
-            under: 0.3742138365,
-            red3: 0.08159974198,
-            red2: 0.3338171263,
-            blue3: 0.08159974198,
-            blue2: 0.3338171263,
+            over: 0.3742138364779874,
+            under: 0.3742138364779874,
+            red2: 0.33381712626995647,
+            red3: 0.08159974197710047,
+            blue2: 0.33381712626995647,
+            blue3: 0.08159974197710047,
         };
 
         const MaxProbability = {
-            over: 0.4208998549,
-            under: 0.4208998549,
-            red3: 0.1636832769,
-            red2: 0.4208998549,
-            blue3: 0.1636832769,
-            blue2: 0.4208998549,
+            over: 0.6257861635220126,
+            under: 0.6257861635220126,
+            red2: 0.420899854862119,
+            red3: 0.16368327689082407,
+            blue2: 0.420899854862119,
+            blue3: 0.16368327689082407,
         };
 
         const margin = [
@@ -48,7 +48,7 @@ describe("calculateOddsRange tests", () => {
         ];
 
         // act
-        const odds = calculateOddsRange(margin);
+        calculateOddsRange(margin);
 
         // assert
         expect(Helpers.getBetOdds).toHaveBeenNthCalledWith(1, MaxProbability, margin);

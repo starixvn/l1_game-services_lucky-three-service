@@ -44,25 +44,12 @@ describe("InGameConsumer test", () => {
     });
 
     describe("getBetPercentage", () => {
-        jest.spyOn(EventConsumers.InGameConsumer.prototype, "getBetPercentage").mockReturnValue({
-            over: 37.5,
-            under: 37.5,
-        });
-
-        it("should call super.getBetPercentage", () => {
-            // act
-            const actual = consumer.getBetPercentage({});
-
-            // assert
-            expect(EventConsumers.InGameConsumer.prototype.getBetPercentage).toHaveBeenCalled();
-        });
-
         it("should return correct", () => {
             // act
-            const actual = consumer.getBetPercentage({});
+            const actual = consumer.getBetPercentage({ over: ["1"], under: ["2", "3"] });
 
             // assert
-            expect(actual).toStrictEqual({ over: 37, under: 63 });
+            expect(actual).toStrictEqual({ over: 33, under: 67 });
         });
     });
 

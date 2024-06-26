@@ -8,17 +8,13 @@ export default class InGameConsumer extends EventConsumers.InGameConsumer {
     }
 
     getBetPercentage(playerBetCount: Record<string, string[]>) {
-        const betPercentage = super.getBetPercentage(playerBetCount);
-
-        roundBetPercentage(betPercentage);
-
-        return betPercentage;
+        return roundBetPercentage(playerBetCount);
     }
 
     getCurrentRoundData() {
         const payload = super.getCurrentRoundData();
         const { roundResult }: { roundResult: DrawResult[] } = this.gameData as GameData;
-        const balls = (roundResult as DrawResult[])
+        const balls = roundResult
             .map((res) => res.balls)
             .flat()
             .map((ball) => +ball);

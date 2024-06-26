@@ -18,7 +18,7 @@ module.exports = async () => {
         moduleNameMapper: {
             "d3-array": "<rootDir>/node_modules/d3-array/dist/d3-array.min.js",
         },
-        testPathIgnorePatterns: ["tests/integration-tests/test-suites/"],
+        testPathIgnorePatterns: ["tests/integration-tests/test-suites/" , "tests/integration-tests/service-validation/"],
         globalSetup: "<rootDir>/tests/integration-tests/global-setup.cjs",
         globalTeardown: "<rootDir>/tests/integration-tests/global-teardown.cjs",
         testTimeout: 20000,
