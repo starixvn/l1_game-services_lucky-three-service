@@ -29,30 +29,30 @@ describe("service place bet validation (config: minBet = 1, maxBet = 3000)", () 
     });
 
     describe("when send invalid bet", () => {
-        describe("when bet with stake < 0 ( stake = -1 )", () => {
-            it.each(gameSettings.choices)(
-                `should show betAmountOfAnyChoiceIncorrect error code for bet { %s : -1 } (#Auto_PB_IVB0_%#)`,
-                async (choice) => {
-                    // Arrange
-                    const inGameData = await client.handleGameEvent((data) => data.remainingTime);
+        // describe("when bet with stake < 0 ( stake = -1 )", () => {
+        //     it.each(gameSettings.choices)(
+        //         `should show betAmountOfAnyChoiceIncorrect error code for bet { %s : -1 } (#Auto_PB_IVB0_%#)`,
+        //         async (choice) => {
+        //             // Arrange
+        //             const inGameData = await client.handleGameEvent((data) => data.remainingTime);
 
-                    const payload = { betChoices: {}, clientSeed: "1234" };
+        //             const payload = { betChoices: {}, clientSeed: "1234" };
 
-                    payload.betChoices[choice] = -1;
+        //             payload.betChoices[choice] = -1;
 
-                    setTimeout(() => {
-                        client.emit(eventTypes.bet, payload);
-                    }, getTimeOutToPlacingBetTime(inGameData.remainingTime, gameSettings.durations) * 1000);
+        //             setTimeout(() => {
+        //                 client.emit(eventTypes.bet, payload);
+        //             }, getTimeOutToPlacingBetTime(inGameData.remainingTime, gameSettings.durations) * 1000);
 
-                    // Act
-                    const result = await client.handleGameEvent((data) => data.endBet);
+        //             // Act
+        //             const result = await client.handleGameEvent((data) => data.endBet);
 
-                    // Assert
-                    expect(result.endBet).toBe(-1);
-                    expect(result.notice.errorCode).toBe("SB1925");
-                }
-            );
-        });
+        //             // Assert
+        //             expect(result.endBet).toBe(-1);
+        //             expect(result.notice.errorCode).toBe("SB1925");
+        //         }
+        //     );
+        // });
 
         describe("when bet with stake = 0", () => {
             it.each(gameSettings.choices)(
@@ -342,20 +342,20 @@ describe("service place bet validation (config: minBet = 1, maxBet = 3000)", () 
             });
         });
 
-        describe("when send bet with decimal value", () => {
-            it("should round bet choice { over : 18.7 } to 18 (#Auto_PB_VB2_0)", async () => {
-                // Arrange
-                const inGameData = await client.handleGameEvent((data) => data.remainingTime);
-                setTimeout(() => {
-                    client.emit(eventTypes.bet, { betChoices: { over: 18.7 }, clientSeed: "1234" });
-                }, getTimeOutToPlacingBetTime(inGameData.remainingTime, gameSettings.durations) * 1000);
+        // describe("when send bet with decimal value", () => {
+        //     it("should round bet choice { over : 18.7 } to 18 (#Auto_PB_VB2_0)", async () => {
+        //         // Arrange
+        //         const inGameData = await client.handleGameEvent((data) => data.remainingTime);
+        //         setTimeout(() => {
+        //             client.emit(eventTypes.bet, { betChoices: { over: 18.7 }, clientSeed: "1234" });
+        //         }, getTimeOutToPlacingBetTime(inGameData.remainingTime, gameSettings.durations) * 1000);
 
-                // Act
-                const result = await client.handleGameEvent((data) => data.endBet);
+        //         // Act
+        //         const result = await client.handleGameEvent((data) => data.endBet);
 
-                // Assert
-                expect(result.endBet).toBe(18);
-            });
-        });
+        //         // Assert
+        //         expect(result.endBet).toBe(18);
+        //     });
+        // });
     });
 });

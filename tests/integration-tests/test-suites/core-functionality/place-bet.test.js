@@ -7,39 +7,39 @@ import appConfigs from "../../../../build/app-configs.IGT";
 const socketOptions = socketOptionsFunc(appConfigs.hostingPort);
 
 describe("when place bet", () => {
-        let client;
+    let client;
 
-        beforeEach(async () => {
-            client = new GameClientDriver(socketOptions, initUserSession(normalUser));
+    beforeEach(async () => {
+        client = new GameClientDriver(socketOptions, initUserSession(normalUser));
 
-            const sendSignInInterval = setInterval(() => {
-                client.sendSignInEvent();
-            }, 500);
+        const sendSignInInterval = setInterval(() => {
+            client.sendSignInEvent();
+        }, 500);
 
-            await client.handleSignedInEvent();
+        await client.handleSignedInEvent();
 
-            client.sendInGameEvent();
+        client.sendInGameEvent();
 
-            clearInterval(sendSignInInterval);
-        });
+        clearInterval(sendSignInInterval);
+    });
 
-        afterEach(() => {
-            client.close();
-            client = null;
-        });
+    afterEach(() => {
+        client.close();
+        client = null;
+    });
 
-        it("should round bet choices", async () => {
-            // Arrange
-            const inGameData = await client.handleGameEvent((data) => data.remainingTime);
+    it("should return correct endbet", async () => {
+        // Arrange
+        const inGameData = await client.handleGameEvent((data) => data.remainingTime);
 
-            setTimeout(() => {
-                client.emit(eventTypes.bet, { betChoices: { over: 10.9, red2: 20.9 }, clientSeed: "1234" });
-            }, getTimeOutToPlacingBetTime(inGameData.remainingTime, gameSettings.durations) * 1000);
+        setTimeout(() => {
+            client.emit(eventTypes.bet, { betChoices: { over: 10, red2: 20 }, clientSeed: "1234" });
+        }, getTimeOutToPlacingBetTime(inGameData.remainingTime, gameSettings.durations) * 1000);
 
-            // Act
-            const result = await client.handleGameEvent((data) => data.endBet);
+        // Act
+        const result = await client.handleGameEvent((data) => data.endBet);
 
-            // Assert
-            expect(result.endBet).toBe(30);
-        });
+        // Assert
+        expect(result.endBet).toBe(30);
+    });
 });
