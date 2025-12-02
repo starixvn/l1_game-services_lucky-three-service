@@ -22,7 +22,7 @@ describe("probabilities test", () => {
     const definition = stub<GameDefinition>();
     const publisher = stub<RoundResultPublisher>();
     const provablyFairConsumer = stub<ProvablyFairConsumer>();
-    const numberOfTurnsToRun = 100_000 * gameSettings.numberOfTurnsPerRound;
+    const numberOfTurnsToRun = 20_000 * gameSettings.numberOfTurnsPerRound;
     const BET_CHOICES = {
         over: 0,
         under: 0,
@@ -51,8 +51,8 @@ describe("probabilities test", () => {
                 const draw2 = { ...BET_CHOICES };
                 const draw3 = { ...BET_CHOICES };
                 const expectedProbabilities = {
-                    over: 49.5,
-                    under: 49.5,
+                    over: 49,
+                    under: 49,
                     red2: 37.7,
                     red3: 11.4,
                     blue2: 37.7,

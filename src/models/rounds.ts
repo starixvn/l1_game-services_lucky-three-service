@@ -5,6 +5,7 @@ const modelName = "luckythree_rounds";
 export type DrawResult = {
     drawId: number;
     balls: number[];
+    time?: Date;
 };
 
 const resultSchema = new mongoose.Schema<DrawResult>(
@@ -25,7 +26,7 @@ export type DrawSettlementResult = {
     red2: boolean;
     red3: boolean;
     blue2: boolean;
-    blue4: boolean;
+    blue3: boolean;
 };
 
 const settlementResultSchema = new mongoose.Schema<DrawSettlementResult>(
